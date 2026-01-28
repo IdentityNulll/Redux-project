@@ -18,21 +18,10 @@ A modern, fast, and responsive CRM dashboard built with **React**, **Vite**, **R
 - Automatic token expiration detection
 - Dashboard with analytics and user management
 - Responsive and accessible UI
-- Theme support (dark mode)
-- Multi-language support (i18n)
 - TailwindCSS custom color palette: mostly dark with subtle accents
 
 ## Tech Stack
 - **Frontend:** React, Redux Toolkit, Vite, React Router DOM
 - **Styling:** TailwindCSS with custom palette
 - **HTTP Client:** Axios with token interceptors
-- **Animations:** AOS (Animate On Scroll)
-- **Notifications:** React-Toastify
-- **Icons:** FontAwesome
-
-## Installation
-
-1. Clone the repository:
-```bash
-git clone https://github.com/yourusername/yourcrm.git
-cd yourcrm
+- **Icons:** React Icons
