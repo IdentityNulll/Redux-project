@@ -1,12 +1,38 @@
-# React + Vite
+# YourCRM
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, fast, and responsive CRM dashboard built with **React**, **Vite**, **Redux Toolkit**, and **TailwindCSS**. Designed for performance, accessibility, and easy user management.
 
-Currently, two official plugins are available:
+## Table of Contents
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Folder Structure](#folder-structure)
+- [Environment Variables](#environment-variables)
+- [Screenshots](#screenshots)
+- [Contributing](#contributing)
+- [License](#license)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
+- Secure login with JWT token handling
+- Automatic token expiration detection
+- Dashboard with analytics and user management
+- Responsive and accessible UI
+- Theme support (dark mode)
+- Multi-language support (i18n)
+- TailwindCSS custom color palette: mostly dark with subtle accents
 
-## Expanding the ESLint configuration
+## Tech Stack
+- **Frontend:** React, Redux Toolkit, Vite, React Router DOM
+- **Styling:** TailwindCSS with custom palette
+- **HTTP Client:** Axios with token interceptors
+- **Animations:** AOS (Animate On Scroll)
+- **Notifications:** React-Toastify
+- **Icons:** FontAwesome
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/yourcrm.git
+cd yourcrm
