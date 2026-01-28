@@ -45,25 +45,25 @@ export default function Login() {
 
         navigate("/dashboard");
       } catch (err) {
-        setError(err.response?.data?.message || "Login failed");
+        setError(err.response?.data?.message || "Invalid Email or password");
       } finally {
         setLoading(false);
       }
     },
-    [mail, password, dispatch, navigate]
+    [mail, password, dispatch, navigate],
   );
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-black-950 px-4">
-      <div className="w-full max-w-md bg-paper-100 rounded-2xl shadow-xl p-10">
-        <h1 className="text-4xl text-paper-90 font-bold mb-8 text-center">
+      <div className="w-full max-w-md bg-blue-900 rounded-2xl shadow-xl p-20">
+        <h1 className="text-4xl text-sky-700 font-bold mb-8 text-center">
           Welcome Back
         </h1>
 
         {error && (
           <div
             role="alert"
-            className="bg-red-700 text-paper-90 text-sm p-3 rounded mb-5 text-center"
+            className="bg-red-700 text-midnight-900 text-sm p-3 rounded mb-5 text-center"
           >
             {error}
           </div>
@@ -73,7 +73,7 @@ export default function Login() {
           <div>
             <label
               htmlFor="email"
-              className="block text-paper-70 mb-2 font-medium"
+              className="block text-white-70 mb-2 font-medium"
             >
               Email
             </label>
