@@ -55,8 +55,8 @@ export default function Login() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-black-950 px-4">
-      <div className="w-full max-w-md bg-blue-900 rounded-2xl shadow-xl p-20">
-        <h1 className="text-4xl text-sky-700 font-bold mb-8 text-center">
+      <div className="w-full max-w-md bg-[var(--bg-card)] rounded-2xl shadow-xl p-20">
+        <h1 className="text-4xl text-[var(--text-main)] font-bold mb-8 text-center">
           Welcome Back
         </h1>
 
@@ -73,7 +73,7 @@ export default function Login() {
           <div>
             <label
               htmlFor="email"
-              className="block text-white-70 mb-2 font-medium"
+              className="block text-[var(--text-main)] mb-2 font-medium"
             >
               Email
             </label>
@@ -85,14 +85,14 @@ export default function Login() {
               value={mail}
               onChange={(e) => setMail(e.target.value)}
               required
-              className="w-full px-4 py-3 rounded-lg bg-black-800 text-paper-90 placeholder-paper-50 focus:outline-none focus:ring-2 focus:ring-midnight-700 transition"
+              className="w-full px-4 py-3 rounded-lg bg-[var(--bg-main)] text-[var(--text-main)] placeholder-[var(--text-muted)] focus:outline-none focus:ring-2 focus:ring-midnight-700 transition"
             />
           </div>
 
           <div>
             <label
               htmlFor="password"
-              className="block text-paper-70 mb-2 font-medium"
+              className="block text-[var(--text-main)] mb-2 font-medium"
             >
               Password
             </label>
@@ -105,12 +105,12 @@ export default function Login() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                className="w-full px-4 py-3 rounded-lg bg-black-800 text-paper-90 placeholder-paper-50 focus:outline-none focus:ring-2 focus:ring-midnight-700 transition pr-12"
+                className="w-full px-4 py-3 rounded-lg bg-[var(--bg-main)] text-[var(--text-main)] placeholder-[var(--text-muted)] focus:outline-none focus:ring-2 focus:ring-midnight-700 transition pr-12"
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-3 text-paper-50 hover:text-paper-90 focus:outline-none focus:ring-2 focus:ring-midnight-700 rounded"
+                className="absolute right-3 top-3 text-[var(--text-main)] hover:text-paper-90 focus:outline-none focus:ring-2 focus:ring-midnight-700 rounded"
                 aria-label={showPassword ? "Hide password" : "Show password"}
               >
                 {showPassword ? "Hide" : "Show"}
@@ -121,7 +121,7 @@ export default function Login() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3 mt-1 bg-midnight-900 hover:bg-midnight-800 text-paper-90 font-semibold rounded-lg transition-colors disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-midnight-700"
+            className="w-full py-3 mt-1 bg-[var(--color-primary)] hover:bg-midnight-800 text-paper-90 font-semibold rounded-lg transition-colors disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-midnight-700"
           >
             {loading ? "Signing in..." : "Sign In"}
           </button>

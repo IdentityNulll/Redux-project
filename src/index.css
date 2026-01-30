@@ -8,7 +8,27 @@
 
 
 body {
-  background-color: #12121A;
+  background-color: var(--bg-main);
   color: #EDEDED;
   font-family: "Inter";
+}
+
+
+:root {
+  /* Backgrounds */
+  --bg-main: #EEF2F7;
+  --bg-card: #FFFFFF;
+
+  /* Text */
+  --text-main: #0F172A;
+  --text-muted: #475569;
+
+  /* Brand colors */
+  --color-primary: #1E3A8A;   /* headings, navbar */
+  --color-secondary: #2563EB; /* links */
+  --color-accent: #F59E0B;    /* buttons, highlights */
+
+  /* UI */
+  --border-color: #E2E8F0;
+  --radius: 0.625rem;
 }
