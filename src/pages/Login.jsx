@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { setCredentials } from "../features/auth/authSlice";
 import { useNavigate } from "react-router-dom";
@@ -24,6 +24,12 @@ export default function Login() {
     }
     navigate("/dashboard");
   }, [navigate]);
+
+  const emailRef = useRef(null);
+
+  useEffect(() => {
+    emailRef.current?.focus();
+  }, []);
 
   const handleSubmit = useCallback(
     async (e) => {
@@ -55,7 +61,7 @@ export default function Login() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-black-950 px-4">
-      <div className="w-full max-w-md bg-[var(--bg-card)] rounded-2xl shadow-xl p-20">
+      <div className="w-full max-w-md bg-[var(--bg-card)] rounded-2xl shadow-xl px-8 py-20 sm:p-20">
         <h1 className="text-4xl text-[var(--text-main)] font-bold mb-8 text-center">
           Welcome Back
         </h1>
@@ -85,6 +91,7 @@ export default function Login() {
               value={mail}
               onChange={(e) => setMail(e.target.value)}
               required
+              ref={emailRef}
               className="w-full px-4 py-3 rounded-lg bg-[var(--bg-main)] text-[var(--text-main)] placeholder-[var(--text-muted)] focus:outline-none focus:ring-2 focus:ring-midnight-700 transition"
             />
           </div>
