@@ -10,6 +10,7 @@ import Profile from './pages/Profile'
 import Schedule from './pages/Schedule'
 import ClassDetails from './pages/ClassDetails'
 import ProtectedRoute from './components/ProtectedRoute'
+import Notfound from './components/Notfound'
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path="/profile/:id" element={<Profile />} />
           <Route path="/schedule" element={<Schedule />} />
           <Route path="/classdetails/:id" element={<ClassDetails />} />
+          <Route path='*' element={<Notfound/>}/>
         </Route>
       </Route>
     </Routes>

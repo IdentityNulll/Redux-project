@@ -9,7 +9,7 @@
 
 body {
   background-color: var(--bg-main);
-  color: #EDEDED;
+  color: var(--text-main);
   font-family: "Inter";
 }
 
