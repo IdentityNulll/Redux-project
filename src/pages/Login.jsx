@@ -59,6 +59,8 @@ export default function Login() {
     [mail, password, dispatch, navigate],
   );
 
+  
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-black-950 px-4">
       <div className="w-full max-w-md bg-[var(--bg-card)] rounded-2xl shadow-xl px-8 py-20 sm:p-20">
