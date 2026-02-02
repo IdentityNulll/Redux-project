@@ -24,8 +24,7 @@ function Sidebar() {
     { name: "Profile", path: "/profile/1", icon: <IoMdPerson /> },
   ];
 
-
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const handleLogOut = () => {
     localStorage.clear();
     navigate("/");
@@ -111,15 +110,13 @@ function Sidebar() {
         style={{ borderColor: "var(--border-color)" }}
       >
         <button
-          className="flex items-center gap-4 w-full transition cursor-pointer hover:text-red-600"
-          onClick={() => handleLogOut()}
-          style={{
-            color: "var(--text-muted)",
-            fontSize: "1rem",
-          }}
+          className={clsx(
+            "flex items-center gap-4 w-full transition cursor-pointer text-slate-500 hover:text-red-600 text-base",
+          )}
+          onClick={handleLogOut}
         >
-          <IoMdLogOut className="text-2xl "/>
-          {!collapsed && <span className="hover:text-red-600">Logout</span>}
+          <IoMdLogOut className="text-2xl" />
+          {!collapsed && <span>Logout</span>}
         </button>
       </div>
     </aside>
