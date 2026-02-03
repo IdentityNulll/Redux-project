@@ -15,13 +15,14 @@ import { useNavigate } from "react-router-dom";
 function Sidebar() {
   const [collapsed, setCollapsed] = useState(false);
   const location = useLocation();
+  const userId = localStorage.getItem("id")
 
   const menuItems = [
     { name: "Dashboard", path: "/dashboard", icon: <IoMdHome /> },
     { name: "Analytics", path: "/analytics", icon: <IoMdAnalytics /> },
     { name: "Schedule", path: "/schedule", icon: <IoMdCalendar /> },
     { name: "Manage Users", path: "/manageusers", icon: <IoMdPeople /> },
-    { name: "Profile", path: "/profile/1", icon: <IoMdPerson /> },
+    { name: "Profile", path: `/profile/${userId}`, icon: <IoMdPerson /> },
   ];
 
   const navigate = useNavigate();
