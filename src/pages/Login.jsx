@@ -52,6 +52,8 @@ export default function Login() {
         navigate("/dashboard");
       } catch (err) {
         setError(err.response?.data?.message || "Invalid Email or password");
+        setPassword("")
+        setMail("")
       } finally {
         setLoading(false);
       }
@@ -130,14 +132,14 @@ export default function Login() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3 mt-1 bg-[var(--color-primary)] hover:bg-midnight-800 text-paper-90 font-semibold rounded-lg transition-colors disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-midnight-700"
+            className="w-full text-red-50 py-3 mt-1 bg-[var(--color-primary)] hover:bg-midnight-800 text-paper-90 font-semibold rounded-lg transition-colors disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-midnight-700"
           >
             {loading ? "Signing in..." : "Sign In"}
           </button>
         </form>
 
         <p className="text-paper-50 text-center mt-6 text-sm select-none">
-          © 2026 YourCRM. All rights reserved.
+          © 2026 CactusCRM. All rights reserved.
         </p>
       </div>
     </div>

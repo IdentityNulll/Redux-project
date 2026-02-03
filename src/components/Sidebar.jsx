@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import {
   IoMdHome,
@@ -11,11 +11,18 @@ import {
 import { TbLayoutSidebarFilled } from "react-icons/tb";
 import clsx from "clsx";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { logout } from "../features/auth/authSlice";
 
 function Sidebar() {
   const [collapsed, setCollapsed] = useState(false);
   const location = useLocation();
   const userId = localStorage.getItem("id")
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    
+  },[])
 
   const menuItems = [
     { name: "Dashboard", path: "/dashboard", icon: <IoMdHome /> },
@@ -27,8 +34,8 @@ function Sidebar() {
 
   const navigate = useNavigate();
   const handleLogOut = () => {
-    localStorage.clear();
-    navigate("/");
+    dispatch(logout())
+    navigate("/", {replace : true});
   };
   return (
     <aside
