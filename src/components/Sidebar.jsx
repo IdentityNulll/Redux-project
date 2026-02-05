@@ -11,7 +11,7 @@ import {
 import { TbLayoutSidebarFilled } from "react-icons/tb";
 import clsx from "clsx";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../features/auth/authSlice";
 
 function Sidebar() {
@@ -20,9 +20,6 @@ function Sidebar() {
   const userId = localStorage.getItem("id")
   const dispatch = useDispatch()
 
-  useEffect(() => {
-    
-  },[])
 
   const menuItems = [
     { name: "Dashboard", path: "/dashboard", icon: <IoMdHome /> },
