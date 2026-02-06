@@ -1,31 +1,37 @@
-import { createSlice } from '@reduxjs/toolkit'
-
-const token = localStorage.getItem('token')
-
-const initialState = {
-  user: null,
-  token: token || null,
-  isAuthenticated: !!token,
-}
-
-const authSlice = createSlice({
-  name: 'auth',
-  initialState,
+const userSlice = createSlice({
+  name: "user",
+  initialState: {
+    profile: null,
+    avatarUrl: null, // 👈 this is the magic
+  },
   reducers: {
-    setCredentials: (state, action) => {
-      state.user = action.payload.user
-      state.token = action.payload.token
-      state.isAuthenticated = true
-      localStorage.setItem('token', action.payload.token)
+    setUserProfile: (state, action) => {
+      state.profile = action.payload;
     },
-    logout: (state) => {
-      state.user = null
-      state.token = null
-      state.isAuthenticated = false
-      localStorage.clear()
+    setAvatar: (state, action) => {
+      state.avatarUrl = action.payload;
     },
   },
-})
+});
 
-export const { setCredentials, logout } = authSlice.actions
-export default authSlice.reducer
+
+export const fetchUserProfile = createAsyncThunk(
+  "user/fetchProfile",
+  async (_, { dispatch, getState }) => {
+    const { id } = getState().auth.user;
+
+    const res = await api.get(`/api/admin/${id}`);
+    const user = res.data.data;
+
+    dispatch(setUserProfile(user));
+
+    if (user.photoUrl) {
+      const avatar = await fetchUserImage(user.photoUrl);
+      dispatch(setAvatar(avatar));
+    }
+  }
+);
+
+
+export const { setUserProfile, setAvatar } = userSlice.actions;
+export default userSlice.reducer;
