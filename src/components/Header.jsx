@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
+import { useSelector } from "react-redux";
 
 function Header() {
-  return (
-    <div>Header</div>
-  )
+  // const avatar = useSelector((state) => state.user.avatarUrl);
+  return <div>
+    {/* <img src={avatar} alt="" /> */}
+    header
+  </div>;
 }
 
-export default Header
+export default Header;

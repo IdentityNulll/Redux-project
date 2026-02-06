@@ -42,26 +42,30 @@ export default function Login() {
         const { data } = res.data;
         const { currentUserId, role, token, expiredTime } = data;
 
-        dispatch(setCredentials({ token, id: currentUserId, name: role }));
+        dispatch(
+          setCredentials({
+            token,
+            id: currentUserId,
+            role,
+          }),
+        );
 
-        localStorage.setItem("token", token);
-        localStorage.setItem("id", currentUserId);
-        localStorage.setItem("name", role);
+        // localStorage.setItem("token", token);
+        // localStorage.setItem("id", currentUserId);
+        // localStorage.setItem("name", role);
         localStorage.setItem("expiredTime", expiredTime);
 
         navigate("/dashboard");
       } catch (err) {
         setError(err.response?.data?.message || "Invalid Email or password");
-        setPassword("")
-        setMail("")
+        setPassword("");
+        setMail("");
       } finally {
         setLoading(false);
       }
     },
     [mail, password, dispatch, navigate],
   );
-
-  
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-black-950 px-4">
