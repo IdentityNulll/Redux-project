@@ -17,7 +17,7 @@ import { logout } from "../features/auth/authSlice";
 function Sidebar() {
   const [collapsed, setCollapsed] = useState(false);
   const location = useLocation();
-  const userId = localStorage.getItem("id")
+  const userId = useSelector((state) => state.auth.user.id)
   const dispatch = useDispatch()
 
 
