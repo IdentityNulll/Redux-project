@@ -16,6 +16,10 @@ import { fetchUserProfile } from "./features/user/userSlice";
 import { useEffect } from "react";
 import axios from "axios";
 import Loading from "./components/Loading";
+import Attendance from "./pages/Attendance";
+import { fetchStudentProfile } from "./features/students/studentsSlice";
+import { fetchClasses } from "./features/classes/classesSlice";
+import { fetchTodayLessons } from "./features/lessons/todaysLessonsSlice";
 
 function App() {
   const dispatch = useDispatch();
@@ -25,6 +29,9 @@ function App() {
   useEffect(() => {
     if (isAuthenticated) {
       dispatch(fetchUserProfile());
+      dispatch(fetchStudentProfile());
+      dispatch(fetchClasses());
+      dispatch(fetchTodayLessons())
     }
   }, [dispatch, isAuthenticated]);
 
@@ -44,6 +51,7 @@ function App() {
           <Route path="/analytics" element={<Analytics />} />
           <Route path="/manageusers" element={<ManagaUsers />} />
           <Route path="/profile/:id" element={<Profile />} />
+          <Route path="/attendance" element={<Attendance/>}/>
           <Route path="/schedule" element={<Schedule />} />
           <Route path="/classdetails/:id" element={<ClassDetails />} />
           <Route path="*" element={<Notfound />} />
