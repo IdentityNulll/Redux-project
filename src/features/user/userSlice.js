@@ -8,16 +8,22 @@ export const fetchUserProfile = createAsyncThunk(
 
     if (!authUser?.id) return;
 
-    const res = await api.get(`/admin/${authUser.id}`);
-    const user = res.data.data;
+    dispatch(setLoading(true));
 
-    const { id, role, photoUrl, ...profileData } = user;
+    try {
+      const res = await api.get(`/admin/${authUser.id}`);
+      const user = res.data.data;
 
-    dispatch(setUserProfile(profileData));
+      const { id, role, photoUrl, ...profileData } = user;
 
-    if (photoUrl) {
-      const avatar = await fetchUserImage(photoUrl);
-      dispatch(setAvatar(avatar));
+      dispatch(setUserProfile(profileData));
+
+      if (photoUrl) {
+        const avatar = await fetchUserImage(photoUrl);
+        dispatch(setAvatar(avatar));
+      }
+    } finally {
+      dispatch(setLoading(false))
     }
   },
 );
@@ -31,6 +37,7 @@ const userSlice = createSlice({
       mail: null,
       birthday: null,
       photoUrl: null,
+      loading: false,
     },
     avatarUrl: null,
   },
@@ -41,8 +48,11 @@ const userSlice = createSlice({
     setAvatar: (state, action) => {
       state.avatarUrl = action.payload;
     },
+    setLoading: (state, action) => {
+      state.loading = action.payload;
+    },
   },
 });
 
-export const { setUserProfile, setAvatar } = userSlice.actions;
+export const { setUserProfile, setAvatar, setLoading } = userSlice.actions;
 export default userSlice.reducer;

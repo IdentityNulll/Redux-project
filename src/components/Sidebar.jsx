@@ -7,6 +7,7 @@ import {
   IoMdPeople,
   IoMdPerson,
   IoMdLogOut,
+  IoMdCheckboxOutline
 } from "react-icons/io";
 import { TbLayoutSidebarFilled } from "react-icons/tb";
 import clsx from "clsx";
@@ -26,6 +27,7 @@ function Sidebar() {
     { name: "Analytics", path: "/analytics", icon: <IoMdAnalytics /> },
     { name: "Schedule", path: "/schedule", icon: <IoMdCalendar /> },
     { name: "Manage Users", path: "/manageusers", icon: <IoMdPeople /> },
+    { name :"Attendance", path: "/attendance", icon: <IoMdCheckboxOutline/>},
     { name: "Profile", path: `/profile/${userId}`, icon: <IoMdPerson /> },
   ];
 
