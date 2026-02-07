@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 function Notfound() {
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center px-6 text-center">
+    <div className="min-h-[80vh] flex flex-col items-center justify-center px-6 text-center">
       
       <div className="flex items-center gap-4 mb-6">
         <TbXboxXFilled className="text-4xl sm:text-5xl text-red-600" />

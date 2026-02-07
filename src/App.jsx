@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchUserProfile } from "./features/user/userSlice";
 import { useEffect } from "react";
 import axios from "axios";
+import Loading from "./components/Loading";
 
 function App() {
   const dispatch = useDispatch();
@@ -28,8 +29,8 @@ function App() {
   }, [dispatch, isAuthenticated]);
 
   useEffect(() => {
-    axios.get("/")
-  }, [])
+    axios.get("/");
+  }, []);
 
   return (
     <Routes>
