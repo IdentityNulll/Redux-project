@@ -17,9 +17,9 @@ import { logout } from "../features/auth/authSlice";
 function Sidebar() {
   const [collapsed, setCollapsed] = useState(false);
   const location = useLocation();
-  const userId = useSelector((state) => state.auth.user.id)
-  const dispatch = useDispatch()
+  const userId = useSelector((state) => state.auth.user.id);
 
+  const dispatch = useDispatch();
 
   const menuItems = [
     { name: "Dashboard", path: "/dashboard", icon: <IoMdHome /> },
@@ -31,8 +31,8 @@ function Sidebar() {
 
   const navigate = useNavigate();
   const handleLogOut = () => {
-    dispatch(logout())
-    navigate("/", {replace : true});
+    dispatch(logout());
+    navigate("/", { replace: true });
   };
   return (
     <aside

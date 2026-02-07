@@ -22,7 +22,7 @@ const authSlice = createSlice({
       state.isAuthenticated = true;
 
       localStorage.setItem("token", token);
-      // localStorage.setItem("id", id);
+      localStorage.setItem("id", id);
       localStorage.setItem("role", role);
     },
     logout: (state) => {
