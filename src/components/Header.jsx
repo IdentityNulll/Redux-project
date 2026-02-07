@@ -9,12 +9,12 @@ function Header() {
   if (!profile) return null;
 
   return (
-    <header className="flex items-center justify-between p-[10px] px-[20px]">
+    <header className="flex items-center justify-between p-[10px] pr-[40px]">
       <div className="flex capitalize text-[var(--color-primary)] text-[20px] font-semibold tracking-wide">
         <p>
           {profile.firstName} {profile.lastName}
         </p>
-      </div>
+      </div>  
       <Link to={`/profile/${id}`}>
         <img
           src={avatarUrl || "/default-avatar.png"}
