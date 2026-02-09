@@ -20,6 +20,7 @@ import Attendance from "./pages/Attendance";
 import { fetchStudentProfile } from "./features/students/studentsSlice";
 import { fetchClasses } from "./features/classes/classesSlice";
 import { fetchTodayLessons } from "./features/lessons/todaysLessonsSlice";
+import { fetchUsers } from "./features/users/usersSlice";
 
 function App() {
   const dispatch = useDispatch();
@@ -31,7 +32,8 @@ function App() {
       dispatch(fetchUserProfile());
       dispatch(fetchStudentProfile());
       dispatch(fetchClasses());
-      dispatch(fetchTodayLessons())
+      dispatch(fetchTodayLessons());
+      dispatch(fetchUsers({ page: 0, size: 10 }));
     }
   }, [dispatch, isAuthenticated]);
 
@@ -51,7 +53,7 @@ function App() {
           <Route path="/analytics" element={<Analytics />} />
           <Route path="/manageusers" element={<ManagaUsers />} />
           <Route path="/profile/:id" element={<Profile />} />
-          <Route path="/attendance" element={<Attendance/>}/>
+          <Route path="/attendance" element={<Attendance />} />
           <Route path="/schedule" element={<Schedule />} />
           <Route path="/classdetails/:id" element={<ClassDetails />} />
           <Route path="*" element={<Notfound />} />

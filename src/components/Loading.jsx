@@ -27,7 +27,7 @@ const styles = {
     top: 0,
     left: 0,
     width: "100%",
-    height: "4px",
+    height: "6px",
     backgroundColor: "#e0e0e0",
     zIndex: 9999,
   },
