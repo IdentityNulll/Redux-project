@@ -7,35 +7,24 @@ import {
   IoMdAnalytics,
   IoMdSchool,
 } from "react-icons/io";
-
+import Clock from "../components/Clock";
 
 function Dashboard() {
-
   const { list: classes, loading: classesLoading } = useSelector(
-    (state) => state.classes
+    (state) => state.classes,
   );
   const { today: todayLessons, loading: lessonsLoading } = useSelector(
-    (state) => state.lessons
+    (state) => state.lessons,
   );
-
-  const [time, setTime] = useState(new Date());
-
-  useEffect(() => {
-    const timer = setInterval(() => setTime(new Date()), 1000);
-    return () => clearInterval(timer);
-  }, []);
-
 
   const totalClasses = classes.length;
-  const totalStudents = classes.reduce(
-    (sum, cls) => sum + cls.studentCount,
-    0
-  );
+  console.log(totalClasses);
+  const totalStudents = classes.reduce((sum, cls) => sum + cls.studentCount, 0);
   const todaysLessonsCount = todayLessons.length;
 
   return (
     <div className="space-y-6">
-      <section className="flex items-center justify-between bg-[var(--bg-card)] border rounded-[var(--radius)] p-6">
+      <section className="flex items-center justify-between bg-[var(--bg-card)] rounded-[var(--radius)] p-6">
         <div>
           <h1 className="text-2xl font-semibold text-[var(--color-primary)]">
             Welcome back 👋
@@ -46,10 +35,7 @@ function Dashboard() {
         </div>
 
         <div className="text-right">
-          <p className="text-sm text-[var(--text-muted)]">Current Time</p>
-          <p className="text-xl font-mono text-[var(--color-primary)]">
-            {time.toLocaleTimeString()}
-          </p>
+          <Clock />
         </div>
       </section>
 
@@ -78,7 +64,7 @@ function Dashboard() {
         ].map((item) => (
           <div
             key={item.label}
-            className="bg-[var(--bg-card)] border rounded-[var(--radius)] p-5 flex items-center gap-4"
+            className="bg-[var(--bg-card)] rounded-[var(--radius)] p-5 flex items-center gap-4"
           >
             <div className="text-3xl text-[var(--color-secondary)]">
               {item.icon}
@@ -94,7 +80,7 @@ function Dashboard() {
       {/* ===== Classes + Quick Stats ===== */}
       <section className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Classes */}
-        <div className="lg:col-span-2 bg-[var(--bg-card)] border rounded-[var(--radius)] p-6">
+        <div className="lg:col-span-2 bg-[var(--bg-card)]  rounded-[var(--radius)] p-6">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-lg font-semibold text-[var(--color-primary)]">
               My Classes
@@ -114,7 +100,7 @@ function Dashboard() {
               {classes.map((cls) => (
                 <div
                   key={cls.uuid}
-                  className="border rounded-[var(--radius)] p-4 flex items-center justify-between hover:bg-slate-50 transition"
+                  className=" rounded-[var(--radius)] p-4 flex border items-center justify-between hover:bg-slate-50 transition"
                 >
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-full bg-[var(--color-secondary)] text-white flex items-center justify-center font-semibold">
@@ -134,7 +120,7 @@ function Dashboard() {
         </div>
 
         {/* Quick Stats */}
-        <aside className="bg-[var(--bg-card)] border rounded-[var(--radius)] p-6 space-y-4">
+        <aside className="bg-[var(--bg-card)]  rounded-[var(--radius)] p-6 space-y-4">
           <h2 className="text-lg font-semibold text-[var(--color-primary)]">
             Today's Lessons
           </h2>
@@ -149,7 +135,7 @@ function Dashboard() {
             todayLessons.map((lesson) => (
               <div
                 key={lesson.id}
-                className="flex items-center justify-between bg-slate-50 rounded-lg p-4"
+                className="flex items-center border justify-between bg-slate-50 rounded-lg p-4"
               >
                 <div>
                   <p className="font-medium">{lesson.name}</p>
