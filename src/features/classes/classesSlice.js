@@ -6,7 +6,8 @@ export const fetchClasses = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const res = await api.get("/class/all");
-      const classes = res.data.data;
+      const classes = res.data;
+      console.log(classes)
 
       return classes.map((cls) => ({
         uuid: cls.uuid,
