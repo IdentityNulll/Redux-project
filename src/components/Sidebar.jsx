@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import {
   IoMdHome,
@@ -7,7 +7,7 @@ import {
   IoMdPeople,
   IoMdPerson,
   IoMdLogOut,
-  IoMdCheckboxOutline
+  IoMdCheckboxOutline,
 } from "react-icons/io";
 import { TbLayoutSidebarFilled } from "react-icons/tb";
 import clsx from "clsx";
@@ -19,28 +19,41 @@ function Sidebar() {
   const [collapsed, setCollapsed] = useState(false);
   const location = useLocation();
   const userId = useSelector((state) => state.auth.user.id);
-
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 768) {
+        setCollapsed(true);
+      }
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const menuItems = [
     { name: "Dashboard", path: "/dashboard", icon: <IoMdHome /> },
     { name: "Analytics", path: "/analytics", icon: <IoMdAnalytics /> },
     { name: "Schedule", path: "/schedule", icon: <IoMdCalendar /> },
     { name: "Manage Users", path: "/manageusers", icon: <IoMdPeople /> },
-    { name :"Attendance", path: "/attendance", icon: <IoMdCheckboxOutline/>},
+    { name: "Attendance", path: "/attendance", icon: <IoMdCheckboxOutline /> },
     { name: "Profile", path: `/profile/${userId}`, icon: <IoMdPerson /> },
   ];
 
-  const navigate = useNavigate();
   const handleLogOut = () => {
     dispatch(logout());
     navigate("/", { replace: true });
   };
+
   return (
     <aside
       className={clsx(
         "h-screen flex flex-col border-r transition-all duration-300",
-        collapsed ? "w-20" : "w-72",
+        collapsed ? "w-20" : "w-72"
       )}
       style={{
         backgroundColor: "var(--bg-card)",
@@ -62,7 +75,7 @@ function Sidebar() {
 
         <button
           onClick={() => setCollapsed(!collapsed)}
-          className="text-slate-600 hover:text-slate-800 transition"
+          className="hidden md:block text-slate-600 hover:text-slate-800 transition"
         >
           <TbLayoutSidebarFilled className="text-2xl" />
         </button>
@@ -77,8 +90,8 @@ function Sidebar() {
               key={item.name}
               to={item.path}
               className={clsx(
-                "flex items-center gap-4 px-4 py-3 rounded-lg transition",
-                active ? "font-semibold" : "hover:bg-slate-50",
+                "flex flex-col md:flex-row items-center gap-1 md:gap-4 px-4 py-3 rounded-lg transition",
+                active ? "font-semibold" : "hover:bg-slate-50"
               )}
               style={{
                 color: active ? "var(--color-primary)" : "var(--text-muted)",
@@ -91,7 +104,9 @@ function Sidebar() {
               <span
                 className="text-2xl"
                 style={{
-                  color: active ? "var(--color-primary)" : "var(--text-muted)",
+                  color: active
+                    ? "var(--color-primary)"
+                    : "var(--text-muted)",
                 }}
               >
                 {item.icon}
@@ -99,10 +114,10 @@ function Sidebar() {
 
               <span
                 className={clsx(
-                  "whitespace-nowrap transition-all duration-300",
+                  "whitespace-nowrap transition-all duration-300 text-[10px] md:text-base",
                   collapsed
-                    ? "opacity-0 w-0 overflow-hidden"
-                    : "opacity-100 w-auto",
+                    ? "md:opacity-0 md:w-0 md:overflow-hidden"
+                    : "opacity-100 w-auto"
                 )}
               >
                 {item.name}
@@ -117,9 +132,7 @@ function Sidebar() {
         style={{ borderColor: "var(--border-color)" }}
       >
         <button
-          className={clsx(
-            "flex items-center gap-4 w-full transition cursor-pointer text-slate-500 hover:text-red-600 text-base",
-          )}
+          className="flex items-center gap-4 w-full transition cursor-pointer text-slate-500 hover:text-red-600 text-base"
           onClick={handleLogOut}
         >
           <IoMdLogOut className="text-2xl" />
