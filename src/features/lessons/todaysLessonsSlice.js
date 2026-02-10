@@ -17,7 +17,6 @@ export const fetchTodayLessons = createAsyncThunk(
     try {
       const res = await api.get("/lessons");
       const lessons = res.data.data;
-      // console.log(res)
 
       const today = DAY_MAP[new Date().getDay()];
 
