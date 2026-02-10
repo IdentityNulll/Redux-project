@@ -8,10 +8,8 @@ export const fetchUsers = createAsyncThunk(
   async ({ page = 0, size = 10 }, { rejectWithValue }) => {
     try {
       const res = await api.get(`/user/all-users?page=${page}&size=${size}`);
-      console.log("USERS API:", res.data);
       return res.data.data; 
     } catch (err) {
-      console.log("USERS ERROR:", err);
       return rejectWithValue("Failed to fetch users");
     }
   },

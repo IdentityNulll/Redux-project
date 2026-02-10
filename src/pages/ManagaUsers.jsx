@@ -33,7 +33,8 @@ function ManageUsers() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+        {/* TITLE */}
         <div>
           <h1 className="text-2xl font-semibold text-[var(--color-primary)]">
             User Management
@@ -43,6 +44,7 @@ function ManageUsers() {
           </p>
         </div>
 
+        {/* ADD BUTTON */}
         <button
           onClick={() => setOpenAdd(true)}
           className="flex items-center gap-2 bg-[var(--color-primary)] text-white px-4 py-2 rounded-xl text-sm hover:opacity-90"
@@ -52,16 +54,16 @@ function ManageUsers() {
         </button>
       </div>
 
-      <div className="flex flex-wrap gap-4">
+      <div className="flex flex-col sm:flex-row flex-wrap gap-4">
         <input
           type="text"
           placeholder="Search name or email"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="border px-4 py-2 rounded-xl text-sm w-64 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]"
+          className="border px-4 py-2 rounded-xl text-sm w-full sm:w-64 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]"
         />
         <CustomSelect
-          className="w-28"
+          className="w-full sm:w-28"
           value={roleFilter}
           onChange={setRoleFilter}
           options={[
@@ -73,17 +75,76 @@ function ManageUsers() {
         />
       </div>
 
-      <div className="bg-[var(--bg-card)] rounded-2xl border overflow-hidden">
-        <table className="w-full text-sm">
+      {/* MOBILE LIST */}
+      {/* MOBILE LIST */}
+      <div className="md:hidden space-y-4">
+        {filteredUsers.length === 0 ? (
+          <p className="p-4 text-center text-slate-400">No users found</p>
+        ) : (
+          filteredUsers.map((u, i) => (
+            <div
+              key={i}
+              className="bg-[var(--bg-card)] border rounded-2xl p-4 flex flex-col gap-2 shadow-sm hover:shadow-md transition"
+            >
+              {/* USER INFO */}
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-[var(--color-secondary)] text-white flex items-center justify-center font-semibold uppercase">
+                  {u.firstName?.[0]}
+                  {u.lastName?.[0]}
+                </div>
+                <div className="flex-1">
+                  <p className="font-medium text-[var(--color-primary)]">
+                    {u.firstName} {u.lastName}
+                  </p>
+                  <p className="text-xs text-[var(--text-muted)]">
+                    @{u.username}
+                  </p>
+                </div>
+              </div>
+
+              {/* EMAIL & ROLE */}
+              <div className="flex flex-col gap-1 text-sm text-[var(--text-muted)]">
+                <span>Email: {u.mail}</span>
+                <span>Role: {u.role}</span>
+              </div>
+
+              {/* ACTIONS */}
+              <div className="flex items-center gap-3 mt-2 justify-end">
+                <button
+                  title="Reset password"
+                  className="text-amber-600 hover:text-amber-800"
+                >
+                  <FiKey />
+                </button>
+                <button
+                  title="Edit user"
+                  className="text-blue-600 hover:text-blue-800"
+                >
+                  <FiEdit2 />
+                </button>
+                <button
+                  title="Delete user"
+                  className="text-red-600 hover:text-red-800"
+                >
+                  <FiTrash2 />
+                </button>
+              </div>
+            </div>
+          ))
+        )}
+      </div>
+
+      {/* DESKTOP TABLE */}
+      <div className="hidden md:block bg-[var(--bg-card)] rounded-2xl border overflow-x-auto">
+        <table className="w-full text-sm min-w-[600px]">
           <thead className="bg-slate-100 text-slate-600">
             <tr>
               <th className="p-4 text-left">User</th>
-              <th>Email</th>
-              <th>Role</th>
-              <th className="text-right p-4">Actions</th>
+              <th className="p-4 text-left">Email</th>
+              <th className="p-4 text-left">Role</th>
+              <th className="p-4 text-right">Actions</th>
             </tr>
           </thead>
-
           <tbody>
             {filteredUsers.length === 0 ? (
               <tr>
@@ -94,39 +155,56 @@ function ManageUsers() {
             ) : (
               filteredUsers.map((u, i) => (
                 <tr key={i} className="border-t hover:bg-slate-50 transition">
-                  <td className="p-4 flex items-center gap-3">
-                    <div className="w-9 h-9 rounded-full bg-[var(--color-secondary)] text-white flex items-center justify-center font-semibold">
-                      {u.firstName[0]}
-                      {u.lastName[0]}
-                    </div>
-                    <div>
-                      <p className="font-medium">
-                        {u.firstName} {u.lastName}
-                      </p>
-                      <p className="text-xs text-[var(--text-muted)]">
-                        @{u.username}
-                      </p>
+                  {/* USER */}
+                  <td className="p-4">
+                    <div className="flex items-center gap-3">
+                      <div className="w-9 h-9 rounded-full bg-[var(--color-secondary)] text-white flex items-center justify-center font-semibold uppercase">
+                        {u.firstName?.[0]}
+                        {u.lastName?.[0]}
+                      </div>
+                      <div>
+                        <p className="font-medium">
+                          {u.firstName} {u.lastName}
+                        </p>
+                        <p className="text-xs text-[var(--text-muted)]">
+                          @{u.username}
+                        </p>
+                      </div>
                     </div>
                   </td>
 
-                  <td>{u.mail}</td>
+                  {/* EMAIL */}
+                  <td className="p-4">{u.mail}</td>
 
-                  <td>
-                    <span className="px-3 py-1 rounded-full text-xs font-medium bg-slate-200 text-slate-700">
+                  {/* ROLE */}
+                  <td className="p-4">
+                    <span className="inline-block px-3 py-1 rounded-full text-xs font-medium bg-slate-200 text-slate-700">
                       {u.role}
                     </span>
                   </td>
 
-                  <td className="text-right p-4 space-x-3">
-                    <button className="text-amber-600 hover:text-amber-800">
-                      <FiKey />
-                    </button>
-                    <button className="text-blue-600 hover:text-blue-800">
-                      <FiEdit2 />
-                    </button>
-                    <button className="text-red-600 hover:text-red-800">
-                      <FiTrash2 />
-                    </button>
+                  {/* ACTIONS */}
+                  <td className="p-4 text-right">
+                    <div className="inline-flex items-center gap-3">
+                      <button
+                        title="Reset password"
+                        className="text-amber-600 hover:text-amber-800"
+                      >
+                        <FiKey />
+                      </button>
+                      <button
+                        title="Edit user"
+                        className="text-blue-600 hover:text-blue-800"
+                      >
+                        <FiEdit2 />
+                      </button>
+                      <button
+                        title="Delete user"
+                        className="text-red-600 hover:text-red-800"
+                      >
+                        <FiTrash2 />
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ))
@@ -135,7 +213,7 @@ function ManageUsers() {
         </table>
       </div>
 
-      <div className="flex justify-between items-center text-sm text-slate-600">
+      <div className="flex justify-between items-center text-sm text-slate-600 flex-wrap gap-2">
         <span>
           Page {page + 1} of {totalPages}
         </span>

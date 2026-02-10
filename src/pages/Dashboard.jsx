@@ -18,7 +18,6 @@ function Dashboard() {
   );
 
   const totalClasses = classes.length;
-  console.log(totalClasses);
   const totalStudents = classes.reduce((sum, cls) => sum + cls.studentCount, 0);
   const todaysLessonsCount = todayLessons.length;
 
