@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import api from "../api/axios";
 import CustomSelect from "./CustomSelect";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchUsers } from "../features/users/usersSlice";
+
 
 function AddUserModal({ onClose }) {
   const [role, setRole] = useState("");
@@ -13,6 +15,9 @@ function AddUserModal({ onClose }) {
     password: "",
     classId: "",
   });
+
+  const dispath = useDispatch()
+  const {page, size} = useSelector((state) => state.users)
 
   const { list: classes, loading } = useSelector((state) => state.classes);
 
@@ -29,6 +34,9 @@ function AddUserModal({ onClose }) {
   const handleSubmit = async () => {
     const payload = { ...form, role };
     await api.post(getEndpoint(), payload);
+
+    dispath(fetchUsers({page,size}))
+
     onClose();
   };
 

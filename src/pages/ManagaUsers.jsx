@@ -4,6 +4,7 @@ import { IoMdAdd } from "react-icons/io";
 import { FiEdit2, FiTrash2, FiKey } from "react-icons/fi";
 import AddUserModal from "../components/AddUserModal";
 import CustomSelect from "../components/CustomSelect";
+import Loading from "../components/Loading";
 
 function ManageUsers() {
   const {
@@ -28,7 +29,7 @@ function ManageUsers() {
   });
 
   if (loading) {
-    return <p className="text-sm text-[var(--text-muted)]">Loading users…</p>;
+    return <Loading/>;
   }
 
   return (
