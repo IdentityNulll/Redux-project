@@ -55,6 +55,7 @@ function Header() {
             onChange={(e) => setSearch(e.target.value)}
             onKeyDown={handleSearch}
             className="bg-transparent outline-none text-sm"
+            aria-label="Search"
           />
         </div>
 
@@ -75,6 +76,7 @@ function Header() {
             src={avatarUrl || "/default-avatar.png"}
             alt="avatar"
             className="w-10 h-10 rounded-full object-cover border border-[var(--border-color)]"
+            loading="lazy"
           />
         </Link>
       </div>

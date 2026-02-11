@@ -29,6 +29,7 @@ function CustomSelect({
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
+        aria-label="Button"
         className="w-full px-4 py-2 rounded-xl border bg-white text-sm
                    flex items-center justify-between focus:outline-none
                    focus:ring-2 focus:ring-[var(--color-primary)]"

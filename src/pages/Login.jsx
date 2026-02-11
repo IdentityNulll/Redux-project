@@ -86,6 +86,7 @@ export default function Login() {
         <form onSubmit={handleSubmit} className="space-y-6" noValidate>
           <div>
             <label
+              aria-label="Email"
               htmlFor="email"
               className="block text-[var(--text-main)] mb-2 font-medium"
             >
@@ -93,6 +94,7 @@ export default function Login() {
             </label>
             <input
               type="email"
+              aria-label="Email"
               id="email"
               autoComplete="email"
               placeholder="you@example.com"
@@ -107,12 +109,14 @@ export default function Login() {
           <div>
             <label
               htmlFor="password"
+              aria-label="Password"
               className="block text-[var(--text-main)] mb-2 font-medium"
             >
               Password
             </label>
             <div className="relative">
               <input
+                aria-label="Password"
                 type={showPassword ? "text" : "password"}
                 id="password"
                 autoComplete="current-password"
