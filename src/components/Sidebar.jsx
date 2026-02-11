@@ -77,6 +77,7 @@ function Sidebar() {
 
         <button
           onClick={() => setCollapsed(!collapsed)}
+          aria-label="Collapse"
           className="hidden md:block text-slate-600 hover:text-slate-800 transition"
         >
           <TbLayoutSidebarFilled className="text-2xl" />
@@ -91,6 +92,7 @@ function Sidebar() {
             <Link
               key={item.name}
               to={item.path}
+              aria-label={item.name}
               className={clsx(
                 "flex flex-col md:flex-row items-center gap-1 md:gap-4 px-4 py-3 rounded-lg transition",
                 active ? "font-semibold" : "hover:bg-slate-50"

@@ -64,29 +64,34 @@ function AddUserModal({ onClose }) {
             <input
               name="firstName"
               placeholder="First name"
+              aria-label="First Name"
               onChange={handleChange}
               className="border px-3 py-2 rounded-xl"
             />
             <input
               name="lastName"
               placeholder="Last name"
+              aria-label="Last Name"
               onChange={handleChange}
               className="border px-3 py-2 rounded-xl"
             />
             <input
               name="mail"
               placeholder="Email"
+              aria-label="Email"
               onChange={handleChange}
               className="border px-3 py-2 rounded-xl col-span-2"
             />
             <input
               name="birthday"
+              aria-label="Birthday"
               placeholder="Birthday"
               onChange={handleChange}
               className="border px-3 py-2 rounded-xl"
             />
             <input
               name="password"
+              aria-label="Password"
               placeholder="Password"
               type="password"
               onChange={handleChange}
@@ -99,7 +104,6 @@ function AddUserModal({ onClose }) {
                 onChange={(value) =>
                   setForm((prev) => ({ ...prev, classId: value }))
                 }
-
                 options={classes.map((cls) => ({
                   value: cls.uuid,
                   label : cls.name

@@ -60,6 +60,7 @@ function ManageUsers() {
           type="text"
           placeholder="Search name or email"
           value={search}
+          aria-label="Search"
           onChange={(e) => setSearch(e.target.value)}
           className="border px-4 py-2 rounded-xl text-sm w-full sm:w-64 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]"
         />
@@ -189,18 +190,21 @@ function ManageUsers() {
                     <div className="inline-flex items-center gap-3">
                       <button
                         title="Reset password"
+                        aria-label="Reset Password"
                         className="text-amber-600 hover:text-amber-800"
                       >
                         <FiKey />
                       </button>
                       <button
                         title="Edit user"
+                        aria-label="Edit user"
                         className="text-blue-600 hover:text-blue-800"
                       >
                         <FiEdit2 />
                       </button>
                       <button
                         title="Delete user"
+                        aria-label="Delete User"
                         className="text-red-600 hover:text-red-800"
                       >
                         <FiTrash2 />
@@ -220,10 +224,10 @@ function ManageUsers() {
         </span>
 
         <div className="flex gap-2">
-          <button className="px-3 py-1 border rounded-lg hover:bg-slate-100">
+          <button className="px-3 py-1 border rounded-lg hover:bg-slate-100" aria-label="Previous">
             Prev
           </button>
-          <button className="px-3 py-1 border rounded-lg hover:bg-slate-100">
+          <button className="px-3 py-1 border rounded-lg hover:bg-slate-100" aria-label="Next">
             Next
           </button>
         </div>
