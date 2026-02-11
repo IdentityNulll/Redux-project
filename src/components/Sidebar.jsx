@@ -8,6 +8,7 @@ import {
   IoMdPerson,
   IoMdLogOut,
   IoMdCheckboxOutline,
+  IoMdNotificationsOutline,
 } from "react-icons/io";
 import { TbLayoutSidebarFilled } from "react-icons/tb";
 import clsx from "clsx";
@@ -24,7 +25,7 @@ function Sidebar() {
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth <= 768) {
+      if (window.innerWidth <= 800) {
         setCollapsed(true);
       }
     };
@@ -41,6 +42,7 @@ function Sidebar() {
     { name: "Schedule", path: "/schedule", icon: <IoMdCalendar /> },
     { name: "Manage Users", path: "/manageusers", icon: <IoMdPeople /> },
     { name: "Attendance", path: "/attendance", icon: <IoMdCheckboxOutline /> },
+    { name : "Notifications", path: "/notifications", icon: <IoMdNotificationsOutline/> },
     { name: "Profile", path: `/profile/${userId}`, icon: <IoMdPerson /> },
   ];
 

@@ -33,7 +33,7 @@ function Dashboard() {
           </p>
         </div>
 
-        <div className="text-right">
+        <div className="hidden md:block text-right">
           <Clock />
         </div>
       </section>
@@ -128,7 +128,7 @@ function Dashboard() {
             <p className="text-sm text-[var(--text-muted)]">Loading lessons…</p>
           ) : todayLessons.length === 0 ? (
             <p className="text-sm text-[var(--text-muted)]">
-              No lessons today 🎉
+              No lessons for today 
             </p>
           ) : (
             todayLessons.map((lesson) => (

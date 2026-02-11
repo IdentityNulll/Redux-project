@@ -25,7 +25,6 @@ const usersSlice = createSlice({
     size: 10,
     loading: false,
     error: null,
-    password: ""
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -41,7 +40,6 @@ const usersSlice = createSlice({
         state.totalElements = action.payload.totalElements;
         state.totalPages = action.payload.totalPages;
         state.page = action.payload.number;
-        state.password = action.payload.password
         state.size = action.payload.size;
       })
       .addCase(fetchUsers.rejected, (state, action) => {

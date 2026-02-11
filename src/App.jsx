@@ -21,6 +21,8 @@ import { fetchStudentProfile } from "./features/students/studentsSlice";
 import { fetchClasses } from "./features/classes/classesSlice";
 import { fetchTodayLessons } from "./features/lessons/todaysLessonsSlice";
 import { fetchUsers } from "./features/users/usersSlice";
+import Notifications from "./pages/Notifications";
+import Search from "./pages/Search";
 
 function App() {
   const dispatch = useDispatch();
@@ -56,6 +58,8 @@ function App() {
           <Route path="/attendance" element={<Attendance />} />
           <Route path="/schedule" element={<Schedule />} />
           <Route path="/classdetails/:id" element={<ClassDetails />} />
+          <Route path="/notifications" element={<Notifications />} />
+          <Route path="/search" element={<Search />} />
           <Route path="*" element={<Notfound />} />
         </Route>
       </Route>
