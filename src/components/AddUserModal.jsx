@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import api from "../api/axios";
 import CustomSelect from "./CustomSelect";
+import { useSelector } from "react-redux";
 
 function AddUserModal({ onClose }) {
   const [role, setRole] = useState("");
@@ -10,7 +11,10 @@ function AddUserModal({ onClose }) {
     mail: "",
     birthday: "",
     password: "",
+    classId: "",
   });
+
+  const { list: classes, loading } = useSelector((state) => state.classes);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -80,6 +84,20 @@ function AddUserModal({ onClose }) {
               onChange={handleChange}
               className="border px-3 py-2 rounded-xl"
             />
+            {role === "STUDENT" && (
+              <CustomSelect
+                className="w-full"
+                value={form.classId}
+                onChange={(value) =>
+                  setForm((prev) => ({ ...prev, classId: value }))
+                }
+
+                options={classes.map((cls) => ({
+                  value: cls.uuid,
+                  label : cls.name
+                }))}
+              />
+            )}
           </div>
         )}
 
