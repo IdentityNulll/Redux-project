@@ -26,7 +26,7 @@ function Dashboard() {
       <section className="flex items-center justify-between bg-[var(--bg-card)] rounded-[var(--radius)] p-6">
         <div>
           <h1 className="text-2xl font-semibold text-[var(--color-primary)]">
-            Welcome back 👋
+            Welcome back 
           </h1>
           <p className="text-[var(--text-muted)]">
             Manage your classes and track attendance
