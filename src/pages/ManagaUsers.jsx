@@ -35,7 +35,6 @@ function ManageUsers() {
   return (
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-        {/* TITLE */}
         <div>
           <h1 className="text-2xl font-semibold text-[var(--color-primary)]">
             User Management
@@ -45,7 +44,6 @@ function ManageUsers() {
           </p>
         </div>
 
-        {/* ADD BUTTON */}
         <button
           onClick={() => setOpenAdd(true)}
           className="flex items-center gap-2 bg-[var(--color-primary)] text-white px-4 py-2 rounded-xl text-sm hover:opacity-90"
@@ -77,8 +75,6 @@ function ManageUsers() {
         />
       </div>
 
-      {/* MOBILE LIST */}
-      {/* MOBILE LIST */}
       <div className="md:hidden space-y-4">
         {filteredUsers.length === 0 ? (
           <p className="p-4 text-center text-slate-400">No users found</p>
@@ -88,7 +84,6 @@ function ManageUsers() {
               key={i}
               className="bg-[var(--bg-card)] border rounded-2xl p-4 flex flex-col gap-2 shadow-sm hover:shadow-md transition"
             >
-              {/* USER INFO */}
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-full bg-[var(--color-secondary)] text-white flex items-center justify-center font-semibold uppercase">
                   {u.firstName?.[0]}
@@ -104,13 +99,11 @@ function ManageUsers() {
                 </div>
               </div>
 
-              {/* EMAIL & ROLE */}
               <div className="flex flex-col gap-1 text-sm text-[var(--text-muted)]">
                 <span>Email: {u.mail}</span>
                 <span>Role: {u.role}</span>
               </div>
 
-              {/* ACTIONS */}
               <div className="flex items-center gap-3 mt-2 justify-end">
                 <button
                   title="Reset password"
@@ -136,7 +129,6 @@ function ManageUsers() {
         )}
       </div>
 
-      {/* DESKTOP TABLE */}
       <div className="hidden md:block bg-[var(--bg-card)] rounded-2xl border overflow-x-auto">
         <table className="w-full text-sm min-w-[600px]">
           <thead className="bg-slate-100 text-slate-600">
@@ -157,7 +149,6 @@ function ManageUsers() {
             ) : (
               filteredUsers.map((u, i) => (
                 <tr key={i} className="border-t hover:bg-slate-50 transition">
-                  {/* USER */}
                   <td className="p-4">
                     <div className="flex items-center gap-3">
                       <div className="w-9 h-9 rounded-full bg-[var(--color-secondary)] text-white flex items-center justify-center font-semibold uppercase">
@@ -175,17 +166,14 @@ function ManageUsers() {
                     </div>
                   </td>
 
-                  {/* EMAIL */}
                   <td className="p-4">{u.mail}</td>
 
-                  {/* ROLE */}
                   <td className="p-4">
                     <span className="inline-block px-3 py-1 rounded-full text-xs font-medium bg-slate-200 text-slate-700">
                       {u.role}
                     </span>
                   </td>
 
-                  {/* ACTIONS */}
                   <td className="p-4 text-right">
                     <div className="inline-flex items-center gap-3">
                       <button
