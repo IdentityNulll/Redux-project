@@ -37,8 +37,8 @@ export const fetchTodayLessons = createAsyncThunk(
   }
 );
 
-const lessonsSlice = createSlice({
-  name: "lessons",
+const todaysLessonsSlice = createSlice({
+  name: "todaysLessons",
   initialState: {
     today: [],
     loading: false,
@@ -62,4 +62,4 @@ const lessonsSlice = createSlice({
   },
 });
 
-export default lessonsSlice.reducer;
+export default todaysLessonsSlice.reducer;

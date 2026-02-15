@@ -1,107 +1,129 @@
-{/* ===== Timetable ===== */}
-<section aria-label="Weekly timetable">
-  {/* ===== Desktop Table ===== */}
-  <div className="hidden md:block bg-[var(--bg-card)] rounded-[var(--radius)] border border-[var(--border-color)] overflow-x-auto">
-    <table className="w-full text-sm">
-      <caption className="sr-only">
-        Weekly school lesson schedule by day and period
-      </caption>
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchLessons } from "../features/lessons/lessons";
 
-      <thead className="bg-slate-100 text-slate-600">
-        <tr>
-          <th scope="col" className="p-4 text-left">
-            Period
-          </th>
-          {DAYS.map((day) => (
-            <th key={day} scope="col" className="p-4 text-left">
-              {day}
-            </th>
-          ))}
-        </tr>
-      </thead>
+const DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
+const PERIODS = [
+  { id: 1, label: "Period 1" },
+  { id: 2, label: "Period 2" },
+  { id: 3, label: "Period 3" },
+  { id: 4, label: "Period 4" },
+  { id: 5, label: "Period 5" },
+];
 
-      <tbody>
-        {PERIODS.map((period) => (
-          <tr
-            key={period.id}
-            className="border-t border-[var(--border-color)]"
-          >
-            <th
-              scope="row"
-              className="p-4 font-medium text-[var(--color-primary)]"
-            >
-              {period.label}
-            </th>
+function Schedule() {
+  const dispatch = useDispatch();
+  const lessons = useSelector((state) => state.lessons.list || []);
+  const loading = useSelector((state) => state.lessons.loading);
 
-            {DAYS.map((day) => {
-              const lesson = lessonMap[`${day}-${period.id}`];
+  const today = new Date().toLocaleDateString("en-US", { weekday: "long" });
 
-              return (
-                <td key={day} className="p-4">
-                  {lesson ? (
-                    <div className="bg-[var(--color-secondary)] text-white p-2 rounded-md">
-                      <p className="font-medium">{lesson.title}</p>
-                      <p className="text-xs opacity-80">
-                        {lesson.teacher}
-                      </p>
-                    </div>
-                  ) : (
-                    <span className="text-xs text-[var(--text-muted)]">
-                      —
-                    </span>
-                  )}
-                </td>
-              );
-            })}
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  </div>
+  // Map: day -> period -> lesson
+  const scheduleMap = React.useMemo(() => {
+    const map = {};
+    DAYS.forEach((day) => (map[day] = {}));
+    lessons.forEach((lesson) => {
+      if (!map[lesson.day]) return;
+      map[lesson.day][lesson.period] = lesson;
+    });
+    return map;
+  }, [lessons]);
 
-  {/* ===== Mobile View ===== */}
-  <div className="md:hidden space-y-4">
-    {DAYS.map((day) => (
-      <div
-        key={day}
-        className="bg-[var(--bg-card)] rounded-[var(--radius)] border border-[var(--border-color)] p-4"
-      >
-        <h2 className="font-semibold text-[var(--color-primary)] mb-3">
-          {day}
-        </h2>
+  if (loading) {
+    return <p className="text-[var(--text-muted)]">Loading schedule…</p>;
+  }
 
-        <div className="space-y-3">
-          {PERIODS.map((period) => {
-            const lesson = lessonMap[`${day}-${period.id}`];
+  if (lessons.length === 0) {
+    return <p className="text-[var(--text-muted)]">No lessons available</p>;
+  }
 
-            return (
-              <div
-                key={period.id}
-                className="flex justify-between items-center border-b border-[var(--border-color)] pb-2 last:border-none"
-              >
-                <span className="text-sm font-medium">
-                  {period.label}
-                </span>
+  return (
+    <div className="space-y-6">
+      <h1 className="text-2xl font-semibold text-[var(--color-primary)]">
+        Weekly Schedule
+      </h1>
+      <p className="text-sm text-[var(--text-muted)]">
+        View your lessons by period
+      </p>
 
-                {lesson ? (
-                  <div className="text-right">
-                    <p className="text-sm font-medium text-[var(--color-secondary)]">
-                      {lesson.title}
-                    </p>
-                    <p className="text-xs text-[var(--text-muted)]">
-                      {lesson.teacher}
-                    </p>
-                  </div>
-                ) : (
-                  <span className="text-xs text-[var(--text-muted)]">
-                    —
-                  </span>
-                )}
-              </div>
-            );
-          })}
-        </div>
+      {/* Desktop table */}
+      <div className="hidden md:block overflow-x-auto">
+        <table className="w-full border-collapse border border-[var(--border-color)]">
+          <caption className="sr-only">Weekly schedule showing periods and lessons</caption>
+          <thead>
+            <tr>
+              <th className="border p-2 bg-[var(--bg-card)]"></th>
+              {DAYS.map((day) => (
+                <th
+                  key={day}
+                  className={`border p-2 text-center ${
+                    day === today ? "bg-[var(--color-secondary)] text-white font-semibold" : "bg-[var(--bg-card)]"
+                  }`}
+                >
+                  {day}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {PERIODS.map((period) => (
+              <tr key={period.id}>
+                <th className="border p-2 bg-[var(--bg-card)] text-center">{period.label}</th>
+                {DAYS.map((day) => {
+                  const lesson = scheduleMap[day][period.label];
+                  return (
+                    <td
+                      key={day}
+                      className={`border p-2 min-h-[60px] text-center rounded-md transition-colors ${
+                        day === today ? "bg-[var(--color-secondary)] text-white font-semibold" : "bg-[var(--bg-card)]"
+                      }`}
+                      aria-label={
+                        lesson
+                          ? `${lesson.name} with ${lesson.teacher.firstName} ${lesson.teacher.lastName} on ${day} ${period.label}`
+                          : `${period.label} on ${day} empty`
+                      }
+                    >
+                      {lesson ? `${lesson.name} (${lesson.teacher.firstName})` : "-"}
+                    </td>
+                  );
+                })}
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
-    ))}
-  </div>
-</section>
+
+      {/* Mobile cards */}
+      <div className="md:hidden space-y-4">
+        {DAYS.map((day) => (
+          <div
+            key={day}
+            className={`bg-[var(--bg-card)] rounded-[var(--radius)] p-4 border ${
+              day === today ? "ring-2 ring-[var(--color-secondary)]" : ""
+            }`}
+          >
+            <h2 className="font-semibold text-[var(--color-primary)] mb-2">{day}</h2>
+            <div className="space-y-2">
+              {PERIODS.map((period) => {
+                const lesson = scheduleMap[day][period.label];
+                return (
+                  <div
+                    key={period.id}
+                    className="flex justify-between items-center bg-slate-100 p-2 rounded-md"
+                  >
+                    <span className="font-medium">{period.label}</span>
+                    <span className="text-[var(--text-muted)]">
+                      {lesson ? `${lesson.name} (${lesson.teacher.firstName})` : "-"}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export default Schedule;

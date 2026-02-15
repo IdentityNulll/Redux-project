@@ -14,7 +14,7 @@ function Dashboard() {
     (state) => state.classes,
   );
   const { today: todayLessons, loading: lessonsLoading } = useSelector(
-    (state) => state.lessons,
+    (state) => state.todaysLessons,
   );
 
   const totalClasses = classes.length;

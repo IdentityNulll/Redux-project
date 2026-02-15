@@ -3,16 +3,18 @@ import authReducer from '../features/auth/authSlice'
 import userReducer from '../features/user/userSlice'
 import studentReducer from "../features/students/studentsSlice"
 import classReducer from "../features/classes/classesSlice"
-import lessonsReducer from "../features/lessons/todaysLessonsSlice"
+import todaysLessonsReducer from "../features/todaysLessons/todaysLessonsSlice"
 import usersReducer from "../features/users/usersSlice"
+import lessonsReducer from "../features/lessons/lessons"
 
 export const store = configureStore({
   reducer: {
     auth: authReducer,
     user: userReducer,
     student: studentReducer,
-    lessons: lessonsReducer,
+    todaysLessons: todaysLessonsReducer,
     classes: classReducer,
     users: usersReducer,
+    lessons: lessonsReducer,
   },
 })
