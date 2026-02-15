@@ -19,10 +19,11 @@ import Loading from "./components/Loading";
 import Attendance from "./pages/Attendance";
 import { fetchStudentProfile } from "./features/students/studentsSlice";
 import { fetchClasses } from "./features/classes/classesSlice";
-import { fetchTodayLessons } from "./features/lessons/todaysLessonsSlice";
+import { fetchTodayLessons } from "./features/todaysLessons/todaysLessonsSlice";
 import { fetchUsers } from "./features/users/usersSlice";
 import Notifications from "./pages/Notifications";
 import Search from "./pages/Search";
+import { fetchLessons } from "./features/lessons/lessons";
 
 function App() {
   const dispatch = useDispatch();
@@ -36,6 +37,7 @@ function App() {
       dispatch(fetchClasses());
       dispatch(fetchTodayLessons());
       dispatch(fetchUsers({ page: 0, size: 10 }));
+      dispatch(fetchLessons())
     }
   }, [dispatch, isAuthenticated]);
 
