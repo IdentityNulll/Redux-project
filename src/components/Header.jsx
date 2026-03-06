@@ -60,7 +60,7 @@ function Header() {
         </div>
 
         {/* Notifications */}
-        <Link className="relative cursor-pointer" to={"/notifications"}>
+        <Link className="relative cursor-pointer" to={"/notifications"} aria-label="Notfications">
           <IoMdNotificationsOutline
             size={22}
             className="text-[var(--color-primary)]"
