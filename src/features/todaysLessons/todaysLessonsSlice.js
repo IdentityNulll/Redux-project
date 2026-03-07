@@ -62,4 +62,4 @@ const todaysLessonsSlice = createSlice({
   },
 });
 
-export default todaysLessonsSlice.reducer;
+export default todaysLessonsSlice .reducer;

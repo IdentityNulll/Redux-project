@@ -1,10 +1,11 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useState, useMemo, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { IoMdAdd } from "react-icons/io";
 import { FiEdit2, FiTrash2, FiKey } from "react-icons/fi";
 import AddUserModal from "../components/AddUserModal";
 import CustomSelect from "../components/CustomSelect";
 import Loading from "../components/Loading";
+import { fetchUsers } from "../features/users/usersSlice";
 
 function ManageUsers() {
   const {
@@ -13,23 +14,49 @@ function ManageUsers() {
     totalElements,
     totalPages,
     page,
+    size,
   } = useSelector((state) => state.users);
+
+  const dispatch = useDispatch();
 
   const [search, setSearch] = useState("");
   const [roleFilter, setRoleFilter] = useState("");
   const [openAdd, setOpenAdd] = useState(false);
 
-  const filteredUsers = users.filter((u) => {
-    const fullName = `${u.firstName} ${u.lastName}`.toLowerCase();
-    const matchesSearch =
-      fullName.includes(search.toLowerCase()) ||
-      u.mail.toLowerCase().includes(search.toLowerCase());
-    const matchesRole = roleFilter ? u.role === roleFilter : true;
-    return matchesSearch && matchesRole;
-  });
+  useEffect(() => {
+    if (page + 2 < totalPages) {
+      dispatch(fetchUsers({ page: page + 1, size }));
+    }
+  }, [page]);
+
+  const filteredUsers = useMemo(() => {
+    return users.filter((u) => {
+      const fullName = `${u.firstName} ${u.lastName}`.toLowerCase();
+
+      const matchesSearch =
+        fullName.includes(search.toLowerCase()) ||
+        u.mail.toLowerCase().includes(search.toLowerCase());
+
+      const matchesRole = roleFilter ? u.role === roleFilter : true;
+
+      return matchesSearch && matchesRole;
+    });
+  }, [users, search, roleFilter]);
+
+  const handleNext = () => {
+    if (page + 1 < totalPages) {
+      dispatch(fetchUsers({ page: page + 1, size }));
+    }
+  };
+
+  const handlePrev = () => {
+    if (page > 0) {
+      dispatch(fetchUsers({ page: page - 1, size }));
+    }
+  };
 
   if (loading) {
-    return <Loading/>;
+    return <Loading />;
   }
 
   return (
@@ -212,10 +239,19 @@ function ManageUsers() {
         </span>
 
         <div className="flex gap-2">
-          <button className="px-3 py-1 border rounded-lg hover:bg-slate-100" aria-label="Previous">
+          <button
+            onClick={handlePrev}
+            disabled={page === 0}
+            className="px-3 py-1 border rounded-lg hover:bg-slate-100 disabled:opacity-40 disabled:cursor-not-allowed"
+          >
             Prev
           </button>
-          <button className="px-3 py-1 border rounded-lg hover:bg-slate-100" aria-label="Next">
+
+          <button
+            onClick={handleNext}
+            disabled={page + 1 === totalPages}
+            className="px-3 py-1 border rounded-lg hover:bg-slate-100 disabled:opacity-40 disabled:cursor-not-allowed"
+          >
             Next
           </button>
         </div>
