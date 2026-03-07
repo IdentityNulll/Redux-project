@@ -6,6 +6,7 @@ import AddUserModal from "../components/AddUserModal";
 import CustomSelect from "../components/CustomSelect";
 import Loading from "../components/Loading";
 import { fetchUsers } from "../features/users/usersSlice";
+import Tooltip from "../components/Tooltip";
 
 function ManageUsers() {
   const {
@@ -144,12 +145,11 @@ function ManageUsers() {
                 >
                   <FiEdit2 />
                 </button>
-                <button
-                  title="Delete user"
-                  className="text-red-600 hover:text-red-800"
-                >
-                  <FiTrash2 />
-                </button>
+                <Tooltip text="Delete this user permanently cursor-pointer">
+                  <button className="text-red-600 hover:text-red-900 ">
+                    <FiTrash2 />
+                  </button>
+                </Tooltip>
               </div>
             </div>
           ))
