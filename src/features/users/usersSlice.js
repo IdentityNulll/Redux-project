@@ -1,8 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import api from "../../api/axios";
-import { act } from "react";
 
-/* ===== FETCH USERS (PAGINATED) ===== */
 export const fetchUsers = createAsyncThunk(
   "users/fetchAll",
   async ({ page = 0, size = 10 }, { rejectWithValue }) => {
