@@ -23,6 +23,7 @@ import { fetchUsers } from "./features/users/usersSlice";
 import Notifications from "./pages/Notifications";
 import Search from "./pages/Search";
 import { fetchLessons } from "./features/lessons/lessons";
+import { fetchTeachers } from "./features/teachers/teacherSlice";
 
 function App() {
   const dispatch = useDispatch();
@@ -37,6 +38,7 @@ function App() {
       dispatch(fetchTodayLessons());
       dispatch(fetchUsers({ page: 0, size: 10 }));
       dispatch(fetchLessons())
+      dispatch((fetchTeachers()))
     }
   }, [dispatch, isAuthenticated]);
 

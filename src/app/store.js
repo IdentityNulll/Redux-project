@@ -6,6 +6,7 @@ import classReducer from "../features/classes/classesSlice"
 import todaysLessonsReducer from "../features/todaysLessons/todaysLessonsSlice"
 import usersReducer from "../features/users/usersSlice"
 import lessonsReducer from "../features/lessons/lessons"
+import teacherReducer from "../features/teachers/teacherSlice"
 
 export const store = configureStore({
   reducer: {
@@ -16,5 +17,6 @@ export const store = configureStore({
     classes: classReducer,
     users: usersReducer,
     lessons: lessonsReducer,
+    teachers : teacherReducer,
   },
 })
