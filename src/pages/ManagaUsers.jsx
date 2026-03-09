@@ -217,13 +217,11 @@ function ManageUsers() {
                       >
                         <FiEdit2 />
                       </button>
-                      <button
-                        title="Delete user"
-                        aria-label="Delete User"
-                        className="text-red-600 hover:text-red-800"
-                      >
-                        <FiTrash2 />
-                      </button>
+                      <Tooltip text="Delete user" >
+                        <button className="text-red-600 hover:text-red-900 cursor-pointer ">
+                          <FiTrash2 />
+                        </button>
+                      </Tooltip>
                     </div>
                   </td>
                 </tr>
