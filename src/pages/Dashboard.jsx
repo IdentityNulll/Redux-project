@@ -6,6 +6,7 @@ import {
   IoMdCalendar,
   IoMdAnalytics,
   IoMdSchool,
+  IoMdCheckboxOutline
 } from "react-icons/io";
 import Clock from "../components/Clock";
 
@@ -51,9 +52,9 @@ function Dashboard() {
             icon: <IoMdPeople />,
           },
           {
-            label: "Today's Lessons",
+            label: "Missing Students",
             value: todaysLessonsCount,
-            icon: <IoMdCalendar />,
+            icon: <IoMdCheckboxOutline />,
           },
           {
             label: "Attendance Rate",

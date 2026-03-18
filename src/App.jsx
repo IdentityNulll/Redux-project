@@ -24,6 +24,7 @@ import Notifications from "./pages/Notifications";
 import Search from "./pages/Search";
 import { fetchLessons } from "./features/lessons/lessons";
 import { fetchTeachers } from "./features/teachers/teacherSlice";
+import { fetchAttendance } from "./features/attendance/attendanceSlice";
 
 function App() {
   const dispatch = useDispatch();
@@ -35,10 +36,11 @@ function App() {
       dispatch(fetchUserProfile());
       dispatch(fetchStudentProfile());
       dispatch(fetchClasses());
-      dispatch(fetchTodayLessons());
+      // dispatch(fetchTodayLessons());
       dispatch(fetchUsers({ page: 0, size: 10 }));
-      dispatch(fetchLessons())
-      dispatch((fetchTeachers()))
+      // dispatch(fetchLessons())
+      dispatch(fetchTeachers());
+      dispatch(fetchAttendance());
     }
   }, [dispatch, isAuthenticated]);
 
@@ -59,7 +61,7 @@ function App() {
           <Route path="/manageusers" element={<ManagaUsers />} />
           <Route path="/profile/:id" element={<Profile />} />
           <Route path="/attendance" element={<Attendance />} />
-          <Route path="/schedule" element={<Schedule />} />
+          {/* <Route path="/schedule" element={<Schedule />} /> */}
           <Route path="/classdetails/:id" element={<ClassDetails />} />
           <Route path="/notifications" element={<Notifications />} />
           <Route path="/search" element={<Search />} />
