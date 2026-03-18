@@ -39,7 +39,7 @@ function Sidebar() {
   const menuItems = [
     { name: "Dashboard", path: "/dashboard", icon: <IoMdHome /> },
     { name: "Analytics", path: "/analytics", icon: <IoMdAnalytics /> },
-    { name: "Schedule", path: "/schedule", icon: <IoMdCalendar /> },
+    // { name: "Schedule", path: "/schedule", icon: <IoMdCalendar /> },
     { name: "Manage Users", path: "/manageusers", icon: <IoMdPeople /> },
     { name: "Attendance", path: "/attendance", icon: <IoMdCheckboxOutline /> },
     { name : "Notifications", path: "/notifications", icon: <IoMdNotificationsOutline/> },
