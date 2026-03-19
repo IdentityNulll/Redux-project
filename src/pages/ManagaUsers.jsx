@@ -145,11 +145,9 @@ function ManageUsers() {
                 >
                   <FiEdit2 />
                 </button>
-                <Tooltip text="Delete this user permanently cursor-pointer">
-                  <button className="text-red-600 hover:text-red-900 ">
-                    <FiTrash2 />
-                  </button>
-                </Tooltip>
+                <button className="text-red-600 hover:text-red-900 ">
+                  <FiTrash2 />
+                </button>
               </div>
             </div>
           ))
@@ -203,21 +201,23 @@ function ManageUsers() {
 
                   <td className="p-4 text-right">
                     <div className="inline-flex items-center gap-3">
-                      <button
-                        title="Reset password"
-                        aria-label="Reset Password"
-                        className="text-amber-600 hover:text-amber-800"
-                      >
-                        <FiKey />
-                      </button>
-                      <button
-                        title="Edit user"
-                        aria-label="Edit user"
-                        className="text-blue-600 hover:text-blue-800"
-                      >
-                        <FiEdit2 />
-                      </button>
-                      <Tooltip text="Delete user" >
+                      <Tooltip text="Reset password" >
+                        <button
+                          aria-label="Reset Password"
+                          className="text-amber-600 hover:text-amber-800 cursor-pointer"
+                        >
+                          <FiKey />
+                        </button>
+                      </Tooltip>
+                      <Tooltip text="Edit user">
+                        <button
+                          aria-label="Edit user"
+                          className="text-blue-600 hover:text-blue-800 cursor-pointer"
+                        >
+                          <FiEdit2 />
+                        </button>
+                      </Tooltip>
+                      <Tooltip text="Delete user">
                         <button className="text-red-600 hover:text-red-900 cursor-pointer ">
                           <FiTrash2 />
                         </button>
