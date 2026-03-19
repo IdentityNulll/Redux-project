@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import {
   IoMdPeople,
-  IoMdCalendar,
   IoMdAnalytics,
   IoMdSchool,
-  IoMdCheckboxOutline
+  IoMdCheckboxOutline,
 } from "react-icons/io";
 import Clock from "../components/Clock";
 
@@ -14,20 +13,37 @@ function Dashboard() {
   const { list: classes, loading: classesLoading } = useSelector(
     (state) => state.classes,
   );
-  const { today: todayLessons, loading: lessonsLoading } = useSelector(
-    (state) => state.todaysLessons,
+
+  const { list: attendanceList, loading: attendanceLoading } = useSelector(
+    (state) => state.attendance,
   );
 
   const totalClasses = classes.length;
-  const totalStudents = classes.reduce((sum, cls) => sum + cls.studentCount, 0);
-  const todaysLessonsCount = todayLessons.length;
+  const totalStudents = classes.reduce(
+    (sum, cls) => sum + (cls.studentCount || 0),
+    0,
+  );
+
+  const missingStudents = attendanceList
+    .filter((item) => item.reasonType === "ABSENT")
+    .slice(0, 4);
+
+  const missingStudentsCount = missingStudents.length;
+
+  const formatReason = (reason) => {
+    if (!reason) return "No reason";
+    return reason
+      .toLowerCase()
+      .replaceAll("_", " ")
+      .replace(/\b\w/g, (char) => char.toUpperCase());
+  };
 
   return (
     <div className="space-y-6">
       <section className="flex items-center justify-between bg-[var(--bg-card)] rounded-[var(--radius)] p-6">
         <div>
           <h1 className="text-2xl font-semibold text-[var(--color-primary)]">
-            Welcome back 
+            Welcome back
           </h1>
           <p className="text-[var(--text-muted)]">
             Manage your classes and track attendance
@@ -53,7 +69,7 @@ function Dashboard() {
           },
           {
             label: "Missing Students",
-            value: todaysLessonsCount,
+            value: missingStudentsCount,
             icon: <IoMdCheckboxOutline />,
           },
           {
@@ -77,10 +93,9 @@ function Dashboard() {
         ))}
       </section>
 
-      {/* ===== Classes + Quick Stats ===== */}
       <section className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Classes */}
-        <div className="lg:col-span-2 bg-[var(--bg-card)]  rounded-[var(--radius)] p-6">
+        <div className="lg:col-span-2 bg-[var(--bg-card)] rounded-[var(--radius)] p-6">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-lg font-semibold text-[var(--color-primary)]">
               My Classes
@@ -100,7 +115,7 @@ function Dashboard() {
               {classes.map((cls) => (
                 <div
                   key={cls.uuid}
-                  className=" rounded-[var(--radius)] p-4 flex border items-center justify-between hover:bg-slate-50 transition"
+                  className="rounded-[var(--radius)] p-4 flex border items-center justify-between hover:bg-slate-50 transition"
                 >
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-full bg-[var(--color-secondary)] text-white flex items-center justify-center font-semibold">
@@ -119,35 +134,50 @@ function Dashboard() {
           )}
         </div>
 
-        {/* Quick Stats */}
-        <aside className="bg-[var(--bg-card)]  rounded-[var(--radius)] p-6 space-y-4">
+        {/* Missing Students */}
+        <aside className="bg-[var(--bg-card)] rounded-[var(--radius)] p-6 space-y-4">
           <h2 className="text-lg font-semibold text-[var(--color-primary)]">
-            Today's Lessons
+            Missing Students
           </h2>
 
-          {lessonsLoading ? (
-            <p className="text-sm text-[var(--text-muted)]">Loading lessons…</p>
-          ) : todayLessons.length === 0 ? (
+          {attendanceLoading ? (
             <p className="text-sm text-[var(--text-muted)]">
-              No lessons for today 
+              Loading attendance…
+            </p>
+          ) : missingStudents.length === 0 ? (
+            <p className="text-sm text-[var(--text-muted)]">
+              No missing students for now
             </p>
           ) : (
-            todayLessons.map((lesson) => (
-              <div
-                key={lesson.id}
-                className="flex items-center border justify-between bg-slate-50 rounded-lg p-4"
-              >
-                <div>
-                  <p className="font-medium">{lesson.name}</p>
-                  <p className="text-sm text-[var(--text-muted)]">
-                    {lesson.teacher.firstName} {lesson.teacher.lastName}
-                  </p>
+            missingStudents.map((item) => {
+              const student = item.studentResponseDto;
+
+              return (
+                <div
+                  key={item.attendanceId}
+                  className="flex items-center border justify-between bg-slate-50 rounded-lg p-4"
+                >
+                  <div className="min-w-0">
+                    <p className="font-medium truncate">
+                      {student?.firstName} {student?.lastName}
+                    </p>
+                    <p className="text-sm text-[var(--text-muted)] truncate">
+                      {formatReason(item.reason)}
+                    </p>
+                  </div>
+
+                  <span
+                    className={`text-xs font-semibold px-2 py-1 rounded-full ${
+                      item.reasonType === "ABSENT"
+                        ? "bg-red-100 text-red-700"
+                        : "bg-yellow-100 text-yellow-700"
+                    }`}
+                  >
+                    {item.reasonType}
+                  </span>
                 </div>
-                <span className="text-xs font-mono text-[var(--text-muted)]">
-                  {lesson.period}
-                </span>
-              </div>
-            ))
+              );
+            })
           )}
         </aside>
       </section>
