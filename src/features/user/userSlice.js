@@ -23,7 +23,7 @@ export const fetchUserProfile = createAsyncThunk(
         dispatch(setAvatar(avatar));
       }
     } finally {
-      dispatch(setLoading(false))
+      dispatch(setLoading(false));
     }
   },
 );
@@ -37,9 +37,9 @@ const userSlice = createSlice({
       mail: null,
       birthday: null,
       photoUrl: null,
-      loading: false,
     },
     avatarUrl: null,
+    loading: false,
   },
   reducers: {
     setUserProfile: (state, action) => {
